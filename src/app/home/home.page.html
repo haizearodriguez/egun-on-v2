@@ -1,20 +1,90 @@
-<ion-header [translucent]="true">
+<ion-header>
   <ion-toolbar>
-    <ion-title>
-      Blank
-    </ion-title>
+    <ion-title>Configura tus Preferencias</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Blank</ion-title>
-    </ion-toolbar>
-  </ion-header>
+<ion-content class="ion-padding">
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>Municipio</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <ion-item>
+        <ion-input [(ngModel)]="prefs.municipalityCode" placeholder="Ej: 48020"></ion-input>
+      </ion-item>
+    </ion-card-content>
+  </ion-card>
 
-  <div id="container">
-    <strong>Ready to create an app?</strong>
-    <p>Start with Ionic <a target="_blank" rel="noopener noreferrer" href="https://ionicframework.com/docs/components">UI Components</a></p>
-  </div>
+  <ion-card>
+    <ion-card-header><ion-card-title>Objetivos</ion-card-title></ion-card-header>
+    <ion-card-content>
+      <ion-item><ion-checkbox slot="start" [(ngModel)]="prefs.goals.cleanAir"></ion-checkbox><ion-label>Aire limpio</ion-label></ion-item>
+      <ion-item><ion-checkbox slot="start" [(ngModel)]="prefs.goals.quiet"></ion-checkbox><ion-label>Tranquilidad (ruido bajo)</ion-label></ion-item>
+      <ion-item><ion-checkbox slot="start" [(ngModel)]="prefs.goals.stressFree"></ion-checkbox><ion-label>Menos estrés (tráfico)</ion-label></ion-item>
+      <ion-item><ion-checkbox slot="start" [(ngModel)]="prefs.goals.performance"></ion-checkbox><ion-label>Rendimiento (meteo)</ion-label></ion-item>
+    </ion-card-content>
+  </ion-card>
+
+  <ion-card>
+    <ion-card-header><ion-card-title>Sensibilidad al aire</ion-card-title></ion-card-header>
+    <ion-card-content>
+      <ion-radio-group [(ngModel)]="prefs.sensitivity">
+        <ion-item><ion-radio slot="start" value="low"></ion-radio><ion-label>Baja</ion-label></ion-item>
+        <ion-item><ion-radio slot="start" value="normal"></ion-radio><ion-label>Normal</ion-label></ion-item>
+        <ion-item><ion-radio slot="start" value="high"></ion-radio><ion-label>Alta (asma/alergias)</ion-label></ion-item>
+      </ion-radio-group>
+    </ion-card-content>
+  </ion-card>
+
+  <ion-card>
+    <ion-card-header><ion-card-title>Actividad</ion-card-title></ion-card-header>
+    <ion-card-content>
+      <ion-item><ion-checkbox slot="start" [(ngModel)]="prefs.activities.walk"></ion-checkbox><ion-label>Caminar</ion-label></ion-item>
+      <ion-item><ion-checkbox slot="start" [(ngModel)]="prefs.activities.run"></ion-checkbox><ion-label>Correr</ion-label></ion-item>
+      <ion-item><ion-checkbox slot="start" [(ngModel)]="prefs.activities.bike"></ion-checkbox><ion-label>Bicicleta</ion-label></ion-item>
+
+      <ion-item>
+        <ion-label>Duración típica</ion-label>
+        <ion-select [(ngModel)]="prefs.typicalDurationMin">
+          <ion-select-option [value]="15">15 min</ion-select-option>
+          <ion-select-option [value]="30">30 min</ion-select-option>
+          <ion-select-option [value]="45">45 min</ion-select-option>
+          <ion-select-option [value]="60">60 min</ion-select-option>
+        </ion-select>
+      </ion-item>
+    </ion-card-content>
+  </ion-card>
+
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>Notificaciones</ion-card-title>
+    </ion-card-header>
+
+    <ion-card-content>
+      <ion-item>
+        <ion-label>Frecuencia</ion-label>
+        <ion-select [(ngModel)]="prefs.notifications">
+          <ion-select-option value="off">Off</ion-select-option>
+          <ion-select-option value="important">Important</ion-select-option>
+          <ion-select-option value="normal">Normal</ion-select-option>
+        </ion-select>
+      </ion-item>
+    </ion-card-content>
+  </ion-card>
+
+  <ion-text color="medium">
+    <p style="margin-top: 8px; font-size: 0.9em;">
+      Avisos sobre calidad del aire, ruido, tráfico o meteorología.
+    </p>
+  </ion-text>
+
+
+  <ion-button expand="block" (click)="save()">Empezar</ion-button>
+
+  <ion-text color="medium">
+    <p class="privacy-note">
+      Privacidad: sin cuenta. Preferencias y patrones se guardan en tu dispositivo.
+    </p>
+  </ion-text>
 </ion-content>
