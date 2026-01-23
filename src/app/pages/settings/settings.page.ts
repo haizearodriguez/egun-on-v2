@@ -1,5 +1,5 @@
 import { StorageService } from '../../core/services/storage';
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import {
@@ -23,7 +23,7 @@ import { Router } from '@angular/router';
   templateUrl: './settings.page.html',
   styleUrls: ['./settings.page.scss'],
 })
-export class SettingsPage {
+export class SettingsPage implements OnInit{
   prefs: Preferences = {
     municipalityCode: '',
     goals: { cleanAir: false, quiet: false, stressFree: false, performance: false },
@@ -35,7 +35,7 @@ export class SettingsPage {
 
   constructor(private storage: StorageService, private router: Router) {}
 
-  async ionViewWillEnter() {
+  async ngOnInit() {
     const saved = await this.storage.getPreferences();
     if (saved) this.prefs = saved;
   }
