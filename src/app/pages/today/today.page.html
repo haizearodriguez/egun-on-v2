@@ -1,5 +1,65 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Hoy</ion-title>
+  </ion-toolbar>
+</ion-header>
+
 <ion-content class="ion-padding">
-  <ion-spinner *ngIf="loading"></ion-spinner>
-  <ion-text color="danger" *ngIf="error"><p>{{ error }}</p></ion-text>
-  <pre *ngIf="data">{{ data | json }}</pre>
+
+  <!-- LOADING -->
+  <div class="ion-text-center" *ngIf="loading">
+    <ion-spinner name="crescent"></ion-spinner>
+    <p>Cargando datos…</p>
+  </div>
+
+  <!-- ERROR -->
+  <ion-card color="danger" *ngIf="error">
+    <ion-card-header>
+      <ion-card-title>Error</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      {{ error }}
+    </ion-card-content>
+  </ion-card>
+
+  <!-- CONTENIDO -->
+  <ng-container *ngIf="!loading && !error">
+
+    <!-- METEO -->
+    <ion-card *ngIf="forecast">
+      <ion-card-header>
+        <ion-card-title>🌤 Previsión meteorológica</ion-card-title>
+      </ion-card-header>
+      <ion-card-content>
+        <pre>{{ forecast | json }}</pre>
+      </ion-card-content>
+    </ion-card>
+
+    <!-- AIR QUALITY -->
+    <ion-card *ngIf="airQuality">
+      <ion-card-header>
+        <ion-card-title>🌫 Calidad del aire</ion-card-title>
+      </ion-card-header>
+      <ion-card-content>
+        <pre>{{ airQuality | json }}</pre>
+      </ion-card-content>
+    </ion-card>
+
+    <!-- TRAFFIC -->
+    <ion-card *ngIf="trafficQuality">
+      <ion-card-header>
+        <ion-card-title>🚦 Tráfico</ion-card-title>
+      </ion-card-header>
+      <ion-card-content>
+        <pre>{{ trafficQuality | json }}</pre>
+      </ion-card-content>
+    </ion-card>
+
+    <!-- EMPTY STATE -->
+    <ion-text color="medium" *ngIf="!forecast && !airQuality && !trafficQuality">
+      <p>No hay datos disponibles.</p>
+    </ion-text>
+
+  </ng-container>
+
 </ion-content>

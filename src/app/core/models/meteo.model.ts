@@ -1,4 +1,4 @@
-export interface MeteoForecast {
+export interface MeteoRoot {
   oid: string;
   numericId: number;
   entityVersion: number;

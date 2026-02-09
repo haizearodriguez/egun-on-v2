@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
 
 @Injectable({ providedIn: 'root' })
+
 export class MeteoService {
   async getForecast(params: {
     regionId: string;
@@ -19,7 +20,8 @@ export class MeteoService {
       `/forecast/at/${at.yyyy}/${String(at.mm).padStart(2, '0')}/${String(at.dd).padStart(2, '0')}` +
       `/for/${encodeURIComponent(forDate)}`;
 
-    const res = await fetch(environment.euskalmetProxyUrl, {
+    const url = `${environment.proxyUrl}/euskalmet`;
+    const res = await fetch(url, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ path, method: 'GET' }),

@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  euskalmetProxyUrl: 'https://euskalmet-proxy.haizea-dev.workers.dev',
+  proxyUrl: 'https://euskadi-proxy.haizea-dev.workers.dev',
 };
 
 /*

@@ -66,6 +66,6 @@ export class HomePage implements OnInit {
   async save() {
     await this.storageService.setPreferences(this.prefs);
     console.log('Preferencias guardadas:', this.prefs);
-    this.router.navigate(['/today']);
+    this.router.navigate(['/tabs/today']);
   }
 }
