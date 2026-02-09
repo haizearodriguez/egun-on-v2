@@ -1,12 +1,12 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { MapPage } from './map.page';
+import { SocialPage } from './social.page';
 
-describe('MapPage', () => {
-  let component: MapPage;
-  let fixture: ComponentFixture<MapPage>;
+describe('SocialPage', () => {
+  let component: SocialPage;
+  let fixture: ComponentFixture<SocialPage>;
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(MapPage);
+    fixture = TestBed.createComponent(SocialPage);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

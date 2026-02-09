@@ -1,65 +1,99 @@
 <ion-header>
   <ion-toolbar>
     <ion-title>Hoy</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="refresh()">
+        <ion-icon name="refresh" slot="icon-only"></ion-icon>
+      </ion-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
 <ion-content class="ion-padding">
 
-  <!-- LOADING -->
+  <ion-refresher slot="fixed" (ionRefresh)="refresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+
   <div class="ion-text-center" *ngIf="loading">
     <ion-spinner name="crescent"></ion-spinner>
     <p>Cargando datos…</p>
   </div>
 
-  <!-- ERROR -->
   <ion-card color="danger" *ngIf="error">
     <ion-card-header>
       <ion-card-title>Error</ion-card-title>
     </ion-card-header>
-    <ion-card-content>
-      {{ error }}
-    </ion-card-content>
+    <ion-card-content>{{ error }}</ion-card-content>
   </ion-card>
 
-  <!-- CONTENIDO -->
-  <ng-container *ngIf="!loading && !error">
+  <ng-container *ngIf="!loading && !error && vm">
 
-    <!-- METEO -->
-    <ion-card *ngIf="forecast">
-      <ion-card-header>
-        <ion-card-title>🌤 Previsión meteorológica</ion-card-title>
-      </ion-card-header>
+    <!-- TOP CARD -->
+    <ion-card class="top-card">
       <ion-card-content>
-        <pre>{{ forecast | json }}</pre>
+        <div class="top-row">
+          <div>
+            <div class="top-title">{{ vm.headline.summary }}</div>
+            <div class="top-sub">Mejor ventana: {{ vm.headline.bestWindow }}</div>
+          </div>
+
+          <div class="score-pill">
+            <span class="score">{{ vm.headline.score }}</span><span class="over">/100</span>
+          </div>
+        </div>
+
+        <div class="badges">
+          <ion-chip *ngFor="let b of vm.badges">
+            <ion-icon [name]="badgeIcon(b)"></ion-icon>
+            <ion-label>{{ b }}</ion-label>
+          </ion-chip>
+        </div>
       </ion-card-content>
     </ion-card>
 
-    <!-- AIR QUALITY -->
-    <ion-card *ngIf="airQuality">
+    <!-- RECOMMENDATIONS -->
+    <ion-card>
       <ion-card-header>
-        <ion-card-title>🌫 Calidad del aire</ion-card-title>
+        <ion-card-title>Qué te recomiendo hoy</ion-card-title>
       </ion-card-header>
       <ion-card-content>
-        <pre>{{ airQuality | json }}</pre>
+        <div class="rec" *ngFor="let r of vm.recommendations">
+          <ion-icon [name]="recIcon(r.type)"></ion-icon>
+          <div class="rec-text">{{ r.text }}</div>
+        </div>
       </ion-card-content>
     </ion-card>
 
-    <!-- TRAFFIC -->
-    <ion-card *ngIf="trafficQuality">
+    <!-- WINDOWS -->
+    <ion-card>
       <ion-card-header>
-        <ion-card-title>🚦 Tráfico</ion-card-title>
+        <ion-card-title>Ventanas horarias</ion-card-title>
       </ion-card-header>
-      <ion-card-content>
-        <pre>{{ trafficQuality | json }}</pre>
+      <ion-card-content class="windows">
+        <div *ngFor="let w of vm.windows" [class]="windowClass(w.status)">
+          <div class="w-label">{{ w.label }}</div>
+          <div class="w-score">{{ w.score }}</div>
+          <div class="w-state">{{ windowLabel(w.status) }}</div>
+        </div>
       </ion-card-content>
     </ion-card>
 
-    <!-- EMPTY STATE -->
-    <ion-text color="medium" *ngIf="!forecast && !airQuality && !trafficQuality">
-      <p>No hay datos disponibles.</p>
-    </ion-text>
+    <!-- EXPLAIN -->
+    <ion-card>
+      <ion-card-header>
+        <ion-card-title>Explicación</ion-card-title>
+      </ion-card-header>
+      <ion-card-content>
+        <div class="explain-metrics">
+          <span>Aire: {{ vm.explain.components.air }}</span>
+          <span>Meteo: {{ vm.explain.components.meteo }}</span>
+          <span>Tráfico: {{ vm.explain.components.traffic }}</span>
+          <span>Ruido: {{ vm.explain.components.noise }}</span>
+        </div>
+        <div class="explain-text">{{ vm.explain.text }}</div>
+      </ion-card-content>
+    </ion-card>
 
   </ng-container>
-
 </ion-content>

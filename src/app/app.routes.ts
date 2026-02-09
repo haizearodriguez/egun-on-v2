@@ -15,8 +15,8 @@ export const routes: Routes = [
         loadComponent: () => import('./pages/today/today.page').then((m) => m.TodayPage),
       },
       {
-        path: 'map',
-        loadComponent: () => import('./pages/map/map.page').then((m) => m.MapPage),
+        path: 'social',
+        loadComponent: () => import('./pages/social/social.page').then((m) => m.SocialPage),
       },
       {
         path: 'settings',
@@ -27,5 +27,9 @@ export const routes: Routes = [
   },
 
   { path: '', redirectTo: 'home', pathMatch: 'full' },
+  {
+    path: 'social',
+    loadComponent: () => import('./pages/social/social.page').then( m => m.SocialPage)
+  },
 ];
 

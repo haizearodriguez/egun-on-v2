@@ -13,13 +13,13 @@ import { IonTabs, IonTabBar, IonTabButton, IonIcon, IonLabel } from '@ionic/angu
           <ion-label>Hoy</ion-label>
         </ion-tab-button>
 
-        <ion-tab-button tab="map" href="/tabs/map">
-          <ion-icon name="map-outline"></ion-icon>
-          <ion-label>Mapa</ion-label>
+        <ion-tab-button tab="social" href="/tabs/social">
+          <ion-icon name="people-outline"></ion-icon>
+          <ion-label>Social</ion-label>
         </ion-tab-button>
 
         <ion-tab-button tab="settings" href="/tabs/settings">
-          <ion-icon name="map-outline"></ion-icon>
+          <ion-icon name="settings-outline"></ion-icon>
           <ion-label>Ajustes</ion-label>
         </ion-tab-button>
       </ion-tab-bar>

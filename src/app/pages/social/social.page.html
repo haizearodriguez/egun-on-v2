@@ -1,0 +1,58 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Pasear juntos</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="refresh()" aria-label="Actualizar">
+        <ion-icon name="refresh" slot="icon-only"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+
+  <div class="status-card good">
+    <h2>🌤️ Buen momento para pasear</h2>
+    <p>{{ goodMomentText }}</p>
+  </div>
+
+  <ion-card *ngIf="error" color="danger">
+    <ion-card-content>{{ error }}</ion-card-content>
+  </ion-card>
+
+  <div class="section">
+    <h3>👣 Hoy salen a pasear</h3>
+
+    <div class="empty" *ngIf="!loading && people.length === 0">
+      No hay nadie compartiendo ahora.
+    </div>
+
+    <ion-list lines="none" *ngIf="people.length > 0">
+      <ion-item *ngFor="let p of people">
+        <ion-label>
+          <strong>{{ p.name }}</strong>
+          <p>{{ p.when }}</p>
+        </ion-label>
+      </ion-item>
+    </ion-list>
+  </div>
+
+  <div class="actions">
+    <ion-button expand="block" size="large" (click)="goNow()">
+      Salgo ahora
+    </ion-button>
+
+    <ion-button expand="block" size="large" fill="outline" (click)="goLater()">
+      Salgo luego
+    </ion-button>
+
+    <ion-button *ngIf="sharing" expand="block" size="large" color="medium" fill="clear" (click)="stopSharing()">
+      Dejar de compartir
+    </ion-button>
+  </div>
+
+  <p class="privacy-note">
+    🔕 Compartir es opcional y temporal.
+  </p>
+
+</ion-content>

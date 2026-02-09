@@ -11,12 +11,14 @@ import {
   calendarNumberOutline,
   mapOutline,
   settingsOutline,
+  peopleOutline
 } from 'ionicons/icons';
 
 addIcons({
   'calendar-number-outline': calendarNumberOutline,
   'map-outline': mapOutline,
   'settings-outline': settingsOutline,
+  'people-outline': peopleOutline,
 });
 
 bootstrapApplication(AppComponent, {
